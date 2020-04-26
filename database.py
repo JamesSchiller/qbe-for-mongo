@@ -81,7 +81,10 @@ def query(db_name, collection_name, keynames, conditions):
                 
         projections.update({keyname: 1}) # can make this show only if show is checked
 
-    res = list(collection.find(selections, projections))
+    if keynames:
+        res = list(collection.find(selections, projections))
+    else:
+        res = []
 
     resnoblanks = [ele for ele in res if ele != {}]
 
