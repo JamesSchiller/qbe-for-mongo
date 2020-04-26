@@ -22,9 +22,6 @@ sorttextboxes = {}
 showcheckboxes = {}
 conditiontextboxes = {}
 
-# def cb(i, cbvars):
-#     x = cbvars[i].get()
-
 def clear_textboxes():
     for i in range(9):
         collectiontextboxes[str(i)].delete(0, END)
