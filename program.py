@@ -104,8 +104,15 @@ scrollableframe.bind(
     )
 )
 
+def configure(event):
+    canvas.after(50, canvas.xview_moveto, 0)
+
+canvas.after(50, canvas.xview_moveto, 0) # hack to start scollbar at leftmost position
+canvas.bind("<Configure>", configure) # and to keep it that way
+
 canvas.create_window((0, 0), window=scrollableframe)
 canvas.configure(xscrollcommand=scrollbar.set)
+
 
 dbs = db_names()
 n = StringVar() 
