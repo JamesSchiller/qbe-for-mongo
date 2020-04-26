@@ -26,7 +26,7 @@ conditiontextboxes = {}
 #     x = cbvars[i].get()
 
 def clear_textboxes():
-    for i in range(8):
+    for i in range(9):
         collectiontextboxes[str(i)].delete(0, END)
         keytextboxes[str(i)].delete(0, END)
         conditiontextboxes[str(i)].delete(0, END)
