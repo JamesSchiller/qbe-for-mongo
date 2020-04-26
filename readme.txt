@@ -1,10 +1,10 @@
-PURPOSE
+PURPOSE:
 
 QBE for a mongo collection
 
 
 
-PREREQUISIES
+PREREQUISIES:
 
 * python 3.8
 install python 3.8 comes with tcl 3.6 setup, which is not buggy
@@ -17,7 +17,7 @@ https://www.activestate.com/products/tcl/downloads/
 
 
 
-PROJECT CREATED FROM
+PROJECT CREATED FROM:
 
 virtualenv --python $(which python3.8) venv
 
@@ -45,7 +45,7 @@ Conditions: != john
 
 
 
-DISCLAIMER
+DISCLAIMER:
 
 adds a keys collection with all possible keys to every database you select
 
