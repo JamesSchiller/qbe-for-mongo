@@ -43,6 +43,13 @@ Conditions: < 45
 Key: name
 Conditions: != john
 
+Key: name
+Sort: asc
+Key: age
+Sort: asc
+
+Key: name
+Sort: desc
 
 
 DISCLAIMER:
