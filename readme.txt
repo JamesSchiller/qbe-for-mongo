@@ -47,6 +47,4 @@ Conditions: != john
 
 DISCLAIMER:
 
-adds a keys collection with all possible keys to every database you select
-
 max 9 columns in a collection
