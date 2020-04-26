@@ -26,6 +26,7 @@ def clear_textboxes():
     for i in range(9):
         collectiontextboxes[str(i)].delete(0, END)
         keytextboxes[str(i)].delete(0, END)
+        sorttextboxes[str(i)].delete(0, END)
         conditiontextboxes[str(i)].delete(0, END)
         cbvars[i].set(0)
 
@@ -59,6 +60,7 @@ def run_query(frame):
     global cbvars
     
     keynames = []
+    sorts = []
     conditions = []
 
     collection_name = collectiontextboxes["0"].get()
@@ -66,11 +68,13 @@ def run_query(frame):
     for i, cb in enumerate(cbvars):
         if cbvars[i].get() or conditiontextboxes[str(i)].get():
             keyname = keytextboxes[str(i)].get()
+            sort = sorttextboxes[str(i)].get()
             condition = conditiontextboxes[str(i)].get()
             keynames.append(keyname)
+            sorts.append(sort)
             conditions.append(condition)
 
-    res = query(db_name, collection_name, keynames, conditions)
+    res = query(db_name, collection_name, keynames, sorts, conditions)
 
     textarea2.delete('1.0', END)
     textarea2.insert('1.0', json.dumps(res, indent=4, default=str))
@@ -78,6 +82,8 @@ def run_query(frame):
     raise_frame(frame)
 
 root = Tk()
+
+root.geometry("900x400")
 
 root.rowconfigure(0, weight=1) 
 root.columnconfigure(0, weight=1)
@@ -112,7 +118,6 @@ canvas.bind("<Configure>", configure) # and to keep it that way
 
 canvas.create_window((0, 0), window=scrollableframe)
 canvas.configure(xscrollcommand=scrollbar.set)
-
 
 dbs = db_names()
 n = StringVar() 

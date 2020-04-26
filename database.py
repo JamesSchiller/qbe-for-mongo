@@ -33,9 +33,10 @@ def get_keys(db_name, collection):
 
     return res
 
-def query(db_name, collection_name, keynames, conditions):
+def query(db_name, collection_name, keynames, sorts, conditions):
     selections = {}
     projections = {}
+    sort = {}
 
     db = client[db_name]
     collection = db[collection_name]
@@ -77,12 +78,19 @@ def query(db_name, collection_name, keynames, conditions):
                     conditions[i] = int(conditions[i])
                 except ValueError:
                     print("leave string a string")
-                selections.update({keyname: {"$eq": conditions[i]}}) 
+                selections.update({keyname: {"$eq": conditions[i]}})
+        if sorts[i]:
+            if sorts[i][0:3].lower() == "asc":
+                sort.update({keyname: 1})
+            elif sorts[i][0:3].lower() == "des":
+                sort.update({keyname: -1})
                 
         projections.update({keyname: 1}) # can make this show only if show is checked
 
     if keynames:
-        res = list(collection.find(selections, projections))
+        res = collection.find(selections, projections)
+        for k, v in sort.items():
+            res.sort(k, v)
     else:
         res = []
 
