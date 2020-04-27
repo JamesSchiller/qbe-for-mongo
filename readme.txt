@@ -83,11 +83,23 @@ Show:
 Conditions:
 DML:        insert   Baylee   22
 
+Collection: profiles profiles
+Key:        _id      name     
+Sort:
+Show:
+Conditions:          Baylee
+DML:        update   Bay
+
+Collection: profiles profiles
+Key:        _id      name     
+Sort:
+Show:
+Conditions:          Bay
+DML:        delete   
+
 
 
 
 DISCLAIMER:
 
 max 9 columns in a collection
-
-DML is not implemented yet
