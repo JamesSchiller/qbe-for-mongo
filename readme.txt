@@ -4,7 +4,8 @@ QBE for a mongo collection
 
 
 
-PREREQUISIES:
+
+PREREQUISITES:
 
 * python 3.8
 install python 3.8 comes with tcl 3.6 setup, which is not buggy
@@ -17,6 +18,7 @@ https://www.activestate.com/products/tcl/downloads/
 
 
 
+
 PROJECT CREATED FROM:
 
 virtualenv --python $(which python3.8) venv
@@ -26,6 +28,7 @@ source venv/bin/activate
 pip install -r requirements.txt 
 
 python program.py
+
 
 
 
@@ -79,6 +82,7 @@ Sort:
 Show:
 Conditions:
 DML:        insert   Baylee   22
+
 
 
 
