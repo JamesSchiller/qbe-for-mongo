@@ -49,9 +49,9 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
             insertions.update({keynames[i]: dmls[i]})
         res = collection.insert(insertions)
     elif dmls[0].lower() == "update":
-        pass
+        res = []
     elif dmls[0].lower() == "delete": 
-        pass
+        res = []
     else:
         for i, keyname in enumerate(keynames):
             if conditions[i]:
@@ -98,7 +98,6 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
             res = collection.find(selections, projections)
             for k, v in sort.items():
                 res.sort(k, v)
-
         res = [ele for ele in res if ele != {}] # filter out blanks
         res = list(res)
 
