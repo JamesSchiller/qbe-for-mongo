@@ -43,12 +43,13 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
 
     projections.update({"_id": False})
 
-    if dmls[0].lower() == "insert":
-        pass
-    elif dmls[0].lower() == "update":
-        pass
-    elif dmls[0].lower() == "delete": 
-        pass
+    if dmls:
+        if dmls[0].lower() == "insert":
+            pass
+        elif dmls[0].lower() == "update":
+            pass
+        elif dmls[0].lower() == "delete": 
+            pass
     else:
         for i, keyname in enumerate(keynames):
             if conditions[i]:
@@ -91,7 +92,7 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
                     sort.update({keyname: 1})
                 elif sorts[i][0:3].lower() == "des":
                     sort.update({keyname: -1})                
-            projections.update({keyname: 1}) # can make this show only if show is checked
+            projections.update({keyname: 1})
 
     if keynames:
         res = collection.find(selections, projections)
