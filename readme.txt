@@ -29,56 +29,57 @@ python program.py
 
 
 
-CONDITIONS LANGUAGE:
+QBE LANGUAGE:
 
-Collection: nameage
-Key: name
+Collection: profiles
+Key:        name
 Sort:
 Show:  
 Conditions: john
 DML: 
 
-Collection: nameage
-Key: name
+Collection: profiles
+Key:        name
 Sort: 
 Show: 
 Conditions: like '%oh%'
 DML:
 
-Collection: nameage
-Key: age
+Collection: profiles
+Key:        age
 Sort: 
 Show:
 Conditions: < 45
 DML:
 
-Collection: nameage
-Key: name
+Collection: profiles
+Key:        name
 Sort: 
 Show:
 Conditions: != john
 DML: 
 
-Collection: nameage  nameage
+Collection: profiles profiles
 Key:        name     age
 Sort:       asc      desc
 Show:
 Conditions:
 DML:
 
-Collection: nameage
-Key: name
-Sort: desc
+Collection: profiles
+Key:        name
+Sort:       desc
 Show: 
 Conditions:
 DML:
 
-Collection:
-Key:
+Collection: profiles profiles profiles
+Key:        _id      name     age
 Sort:
 Show:
 Conditions:
-DML:
+DML:        insert   Baylee   22
+
 
 
 DISCLAIMER:
