@@ -37,19 +37,22 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
     selections = {}
     projections = {}
     sort = {}
+    insertions = {}
 
     db = client[db_name]
     collection = db[collection_name]
 
     projections.update({"_id": False})
 
-    if dmls:
-        if dmls[0].lower() == "insert":
-            pass
-        elif dmls[0].lower() == "update":
-            pass
-        elif dmls[0].lower() == "delete": 
-            pass
+
+    if dmls[0].lower() == "insert":
+        for i in range(1, len(dmls)):
+            insertions.update({keynames[i]: dmls[i]})
+        res = collection.insert(insertions)
+    elif dmls[0].lower() == "update":
+        pass
+    elif dmls[0].lower() == "delete": 
+        pass
     else:
         for i, keyname in enumerate(keynames):
             if conditions[i]:
@@ -94,13 +97,14 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
                     sort.update({keyname: -1})                
             projections.update({keyname: 1})
 
-    if keynames:
-        res = collection.find(selections, projections)
-        for k, v in sort.items():
-            res.sort(k, v)
-    else:
-        res = []
+        if keynames:
+            res = collection.find(selections, projections)
+            for k, v in sort.items():
+                res.sort(k, v)
+        else:
+            res = []
 
-    resnoblanks = [ele for ele in res if ele != {}]
+        res = [ele for ele in res if ele != {}] # filter out blanks
+        res = list(res)
 
-    return list(resnoblanks)
+    return res

@@ -29,6 +29,7 @@ def clear_textboxes():
         keytextboxes[str(i)].delete(0, END)
         sorttextboxes[str(i)].delete(0, END)
         conditiontextboxes[str(i)].delete(0, END)
+        dmltextboxes[str(i)].delete(0, END)
         cbvars[i].set(0)
 
 def collectionchoosen_handler(event):
@@ -68,7 +69,7 @@ def run_query(frame):
     collection_name = collectiontextboxes["0"].get()
 
     for i, cb in enumerate(cbvars):
-        if cbvars[i].get() or conditiontextboxes[str(i)].get():
+        if cbvars[i].get() or conditiontextboxes[str(i)].get() or dmltextboxes[str(i)].get():
             keyname = keytextboxes[str(i)].get()
             sort = sorttextboxes[str(i)].get()
             condition = conditiontextboxes[str(i)].get()
