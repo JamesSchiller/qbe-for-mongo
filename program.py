@@ -162,13 +162,16 @@ labels["3"] = Label(scrollableframe, text="Show:")
 labels["4"] = Label(scrollableframe, text="Conditions:")
 labels["5"] = Label(scrollableframe, text= "DML:")
 
+for i in range(9): # the order you create widgets determines their tab order 
+    dmltextboxes[str(i)] = Entry(scrollableframe)
+
 for i in range(9): 
     collectiontextboxes[str(i)] = Entry(scrollableframe)
     keytextboxes[str(i)] = Entry(scrollableframe)
     sorttextboxes[str(i)] = Entry(scrollableframe)
     showcheckboxes[str(i)] = Checkbutton(scrollableframe, variable=cbvars[i])
     conditiontextboxes[str(i)] = Entry(scrollableframe)
-    dmltextboxes[str(i)] = Entry(scrollableframe)
+
 
 # container2 widgets
 img2 = Image.open('edit.png')
@@ -258,7 +261,6 @@ dmltextboxes["5"].grid(row=5, column=6)
 dmltextboxes["6"].grid(row=5, column=7)
 dmltextboxes["7"].grid(row=5, column=8)
 dmltextboxes["8"].grid(row=5, column=9)
-
 
 # container2 grid
 editbutton.grid(row=0, column=0, sticky="w")
