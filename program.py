@@ -21,6 +21,7 @@ keytextboxes = {}
 sorttextboxes = {}
 showcheckboxes = {}
 conditiontextboxes = {}
+dmltextboxes = {}
 
 def clear_textboxes():
     for i in range(9):
@@ -62,6 +63,7 @@ def run_query(frame):
     keynames = []
     sorts = []
     conditions = []
+    dmls = []
 
     collection_name = collectiontextboxes["0"].get()
 
@@ -73,8 +75,9 @@ def run_query(frame):
             keynames.append(keyname)
             sorts.append(sort)
             conditions.append(condition)
+            dmls.append(dmltextboxes[str(i)].get())
 
-    res = query(db_name, collection_name, keynames, sorts, conditions)
+    res = query(db_name, collection_name, keynames, sorts, conditions, dmls)
 
     textarea2.delete('1.0', END)
     textarea2.insert('1.0', json.dumps(res, indent=4, default=str))
@@ -83,7 +86,7 @@ def run_query(frame):
 
 root = Tk()
 
-root.geometry("900x400")
+root.geometry("900x450")
 
 root.rowconfigure(0, weight=1) 
 root.columnconfigure(0, weight=1)
@@ -156,51 +159,15 @@ labels["1"] = Label(scrollableframe, text="Key:")
 labels["2"] = Label(scrollableframe, text="Sort:")
 labels["3"] = Label(scrollableframe, text="Show:")
 labels["4"] = Label(scrollableframe, text="Conditions:")
-collectiontextboxes["0"] = Entry(scrollableframe)
-keytextboxes["0"] = Entry(scrollableframe)
-sorttextboxes["0"] = Entry(scrollableframe)
-showcheckboxes["0"] = Checkbutton(scrollableframe, variable=cbvars[0])
-conditiontextboxes["0"] = Entry(scrollableframe)
-collectiontextboxes["1"] = Entry(scrollableframe)
-keytextboxes["1"] = Entry(scrollableframe)
-sorttextboxes["1"] = Entry(scrollableframe)
-showcheckboxes["1"] = Checkbutton(scrollableframe, variable=cbvars[1])
-conditiontextboxes["1"] = Entry(scrollableframe)
-collectiontextboxes["2"] = Entry(scrollableframe)
-keytextboxes["2"] = Entry(scrollableframe)
-sorttextboxes["2"] = Entry(scrollableframe)
-showcheckboxes["2"] = Checkbutton(scrollableframe, variable=cbvars[2])
-conditiontextboxes["2"] = Entry(scrollableframe)
-collectiontextboxes["3"] = Entry(scrollableframe)
-keytextboxes["3"] = Entry(scrollableframe)
-sorttextboxes["3"] = Entry(scrollableframe)
-showcheckboxes["3"] = Checkbutton(scrollableframe, variable=cbvars[3])
-conditiontextboxes["3"] = Entry(scrollableframe)
-collectiontextboxes["4"] = Entry(scrollableframe)
-keytextboxes["4"] = Entry(scrollableframe)
-sorttextboxes["4"] = Entry(scrollableframe)
-showcheckboxes["4"] = Checkbutton(scrollableframe, variable=cbvars[4])
-conditiontextboxes["4"] = Entry(scrollableframe)
-collectiontextboxes["5"] = Entry(scrollableframe)
-keytextboxes["5"] = Entry(scrollableframe)
-sorttextboxes["5"] = Entry(scrollableframe)
-showcheckboxes["5"] = Checkbutton(scrollableframe, variable=cbvars[5])
-conditiontextboxes["5"] = Entry(scrollableframe)
-collectiontextboxes["6"] = Entry(scrollableframe)
-keytextboxes["6"] = Entry(scrollableframe)
-sorttextboxes["6"] = Entry(scrollableframe)
-showcheckboxes["6"] = Checkbutton(scrollableframe, variable=cbvars[6])
-conditiontextboxes["6"] = Entry(scrollableframe)
-collectiontextboxes["7"] = Entry(scrollableframe)
-keytextboxes["7"] = Entry(scrollableframe)
-sorttextboxes["7"] = Entry(scrollableframe)
-showcheckboxes["7"] = Checkbutton(scrollableframe, variable=cbvars[7])
-conditiontextboxes["7"] = Entry(scrollableframe)
-collectiontextboxes["8"] = Entry(scrollableframe)
-keytextboxes["8"] = Entry(scrollableframe)
-sorttextboxes["8"] = Entry(scrollableframe)
-showcheckboxes["8"] = Checkbutton(scrollableframe, variable=cbvars[8])
-conditiontextboxes["8"] = Entry(scrollableframe)
+labels["5"] = Label(scrollableframe, text= "DML:")
+
+for i in range(9): 
+    collectiontextboxes[str(i)] = Entry(scrollableframe)
+    keytextboxes[str(i)] = Entry(scrollableframe)
+    sorttextboxes[str(i)] = Entry(scrollableframe)
+    showcheckboxes[str(i)] = Checkbutton(scrollableframe, variable=cbvars[i])
+    conditiontextboxes[str(i)] = Entry(scrollableframe)
+    dmltextboxes[str(i)] = Entry(scrollableframe)
 
 # container2 widgets
 img2 = Image.open('edit.png')
@@ -235,6 +202,7 @@ labels["1"].grid(row=1, column=0, sticky="e")
 labels["2"].grid(row=2, column=0, sticky="e")
 labels["3"].grid(row=3, column=0, sticky="e")
 labels["4"].grid(row=4, column=0, sticky="e")
+labels["5"].grid(row=5, column=0, sticky="e")
 collectiontextboxes["0"].grid(row=0, column=1) 
 collectiontextboxes["1"].grid(row=0, column=2)
 collectiontextboxes["2"].grid(row=0, column=3)
@@ -280,6 +248,16 @@ conditiontextboxes["5"].grid(row=4, column=6)
 conditiontextboxes["6"].grid(row=4, column=7)
 conditiontextboxes["7"].grid(row=4, column=8)
 conditiontextboxes["8"].grid(row=4, column=9)
+dmltextboxes["0"].grid(row=5, column=1)
+dmltextboxes["1"].grid(row=5, column=2)
+dmltextboxes["2"].grid(row=5, column=3)
+dmltextboxes["3"].grid(row=5, column=4)
+dmltextboxes["4"].grid(row=5, column=5)
+dmltextboxes["5"].grid(row=5, column=6)
+dmltextboxes["6"].grid(row=5, column=7)
+dmltextboxes["7"].grid(row=5, column=8)
+dmltextboxes["8"].grid(row=5, column=9)
+
 
 # container2 grid
 editbutton.grid(row=0, column=0, sticky="w")
