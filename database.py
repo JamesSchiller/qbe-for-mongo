@@ -44,7 +44,6 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
 
     projections.update({"_id": False})
 
-
     if dmls[0].lower() == "insert":
         for i in range(1, len(dmls)):
             insertions.update({keynames[i]: dmls[i]})
@@ -96,13 +95,9 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
                 elif sorts[i][0:3].lower() == "des":
                     sort.update({keyname: -1})                
             projections.update({keyname: 1})
-
-        if keynames:
             res = collection.find(selections, projections)
             for k, v in sort.items():
                 res.sort(k, v)
-        else:
-            res = []
 
         res = [ele for ele in res if ele != {}] # filter out blanks
         res = list(res)
