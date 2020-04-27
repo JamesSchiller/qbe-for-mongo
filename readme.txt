@@ -55,3 +55,5 @@ Sort: desc
 DISCLAIMER:
 
 max 9 columns in a collection
+
+DML is not implemented yet
