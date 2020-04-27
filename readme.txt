@@ -31,25 +31,54 @@ python program.py
 
 CONDITIONS LANGUAGE:
 
-Key: name 
+Collection: nameage
+Key: name
+Sort:
+Show:  
 Conditions: john
+DML: 
 
+Collection: nameage
 Key: name
+Sort: 
+Show: 
 Conditions: like '%oh%'
+DML:
 
+Collection: nameage
 Key: age
+Sort: 
+Show:
 Conditions: < 45
+DML:
 
+Collection: nameage
 Key: name
+Sort: 
+Show:
 Conditions: != john
+DML: 
 
-Key: name
-Sort: asc
-Key: age
-Sort: asc
+Collection: nameage  nameage
+Key:        name     age
+Sort:       asc      desc
+Show:
+Conditions:
+DML:
 
+Collection: nameage
 Key: name
 Sort: desc
+Show: 
+Conditions:
+DML:
+
+Collection:
+Key:
+Sort:
+Show:
+Conditions:
+DML:
 
 
 DISCLAIMER:
