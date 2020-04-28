@@ -135,19 +135,19 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
             if conditions[i]:
                 if '!=' in conditions[i]:
                     conditions[i] = conditions[i].replace("!=", "").strip()
-                    selections.update({keyname: {"$ne": conditions[i]}})
+                    selections.update({keynames[i]: {"$ne": conditions[i]}})
                 elif '>=' in conditions[i]:
                     conditions[i] = conditions[i].replace(">=", "").strip()
-                    selections.update({keyname: {"$gte": int(conditions[i])}})
+                    selections.update({keynames[i]: {"$gte": int(conditions[i])}})
                 elif '>' in conditions[i]:
                     conditions[i] = conditions[i].replace(">", "").strip()
-                    selections.update({keyname: {"$gt": int(conditions[i])}})
+                    selections.update({keynames[i]: {"$gt": int(conditions[i])}})
                 elif '<=' in conditions[i]:
                     conditions[i] = conditions[i].replace("<=", "").strip()
-                    selections.update({keyname: {"$lte": int(conditions[i])}})
+                    selections.update({keynames[i]: {"$lte": int(conditions[i])}})
                 elif '<' in conditions[i]:
                     conditions[i] = conditions[i].replace("<", "").strip()
-                    selections.update({keyname: {"$lt": int(conditions[i])}})
+                    selections.update({keynames[i]: {"$lt": int(conditions[i])}})
                 elif 'like' in conditions[i].lower():
                     conditions[i] = conditions[i].replace("like", "").replace("Like", "").replace("LIKE", "").strip()
                     conditions[i] = conditions[i].replace("'", "")
@@ -159,20 +159,20 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
                     elif conditions[i][0] != "%" and conditions[i][len(conditions[i])-1] == "%":
                         conditions[i] = conditions[i].replace("%", "")
                         conditions[i] = "^" + conditions[i]
-                    selections.update({keyname: {"$regex": conditions[i]}})
+                    selections.update({keynames[i]: {"$regex": conditions[i]}})
                 elif '=' in conditions[i] or '' in conditions[i]: # default is =
                     conditions[i] = conditions[i].replace("=", "").strip()
                     try: 
                         conditions[i] = int(conditions[i])
                     except ValueError:
-                        print("leave string a string")
-                    selections.update({keyname: {"$eq": conditions[i]}})
+                        pass # leave string a string
+                    selections.update({keynames[i]: {"$eq": conditions[i]}})
             if sorts[i]:
                 if sorts[i][0:3].lower() == "asc":
-                    sort.update({keyname: 1})
+                    sort.update({keynames[i]: 1})
                 elif sorts[i][0:3].lower() == "des":
-                    sort.update({keyname: -1})                
-            projections.update({keyname: 1})
+                    sort.update({keynames[i]: -1})                
+            projections.update({keynames[i]: 1})
         res = collection.find(selections, projections)
         for k, v in sort.items():
             res.sort(k, v)

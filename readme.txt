@@ -103,3 +103,5 @@ DML:        delete
 DISCLAIMER:
 
 max 9 columns in a collection
+
+aggregation and complex conditions not implemented
