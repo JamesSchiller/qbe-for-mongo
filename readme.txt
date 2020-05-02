@@ -97,12 +97,12 @@ Show:
 Conditions:          Bay
 DML:        delete   
 
-Collection: profiles profiles profiles
-Key:        _id      age    name     friends
+Collection: profiles profiles profiles profiles
+Key:        _id      age      name     friends
 Sort:      
-Show:       x        x      x        x
+Show:       x        x        x        x
 Conditions:                            
-DML:        insert   21     Jack     ["Bob", "Ken", "Karen"]     # Use double qoutes for each friend
+DML:        insert   21       Jack     ["Bob", "Ken", "Karen"]     # Use double qoutes for each friend
 
 Collection: profiles profiles profiles
 Key:        _id      name     friends
