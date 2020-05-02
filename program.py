@@ -74,6 +74,8 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
     if dmls[0].lower() == "insert":
         for i, dml in enumerate(dmls, 0):
             if i > 0:
+                if "[" in dml and "]" in dml:
+                    dml = eval(dml)
                 insertions.update({keynames[i]: dml})
         res = collection.insert(insertions)
     elif dmls[0].lower() == "update":
