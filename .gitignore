@@ -139,4 +139,4 @@ cython_debug/
 
 .DS_Store
 .vscode
-.sh
+*.sh
