@@ -32,19 +32,6 @@ python program.py
 
 
 
-TO MAKE EXECUTABLE:
-
-#! ./venv/bin/python (first line of program.py points to your virtualenv)
-
-change program.py to program.sh
-
-sudo chmod +x program.sh
-
-./program.sh
-
-
-
-
 QBE LANGUAGE:
 
 Collection: profiles
