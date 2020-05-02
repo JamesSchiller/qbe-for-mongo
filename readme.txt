@@ -115,7 +115,7 @@ Collection: profiles profiles
 Key:        _id      name    
 Sort:      
 Show:                      
-Conditions:          =           # Delete all docs where name is blank        
+Conditions:          =           # Delete all profile docs where name is blank        
 DML:        delete
 
 
