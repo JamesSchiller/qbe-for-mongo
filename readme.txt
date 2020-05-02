@@ -120,4 +120,4 @@ max 9 columns in a collection
 
 aggregation and complex conditions not implemented
 
-you cannot not add new keys thru an insert
+refresh if you add new keys thru an insert
