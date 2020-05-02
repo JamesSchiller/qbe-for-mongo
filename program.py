@@ -76,6 +76,11 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
             if i > 0:
                 if "[" in dml and "]" in dml:
                     dml = eval(dml)
+                else:
+                    try: 
+                        dml = int(dml)
+                    except ValueError:
+                        print("leave string a string")
                 insertions.update({keynames[i]: dml})
         res = collection.insert(insertions)
     elif dmls[0].lower() == "update":
