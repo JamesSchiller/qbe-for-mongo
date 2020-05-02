@@ -97,6 +97,13 @@ Show:
 Conditions:          Bay
 DML:        delete   
 
+Collection: profiles profiles profiles
+Key:        _id      name     friends
+Sort:      
+Show:                x        
+Conditions:                   ["Don", "Lynn"]      # Find names whose friends include Don and Lynn         
+DML:           
+
 
 
 
@@ -105,3 +112,5 @@ DISCLAIMER:
 max 9 columns in a collection
 
 aggregation and complex conditions not implemented
+
+you cannot not add new keys thru an insert

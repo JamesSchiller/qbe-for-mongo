@@ -160,6 +160,8 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
                         conditions[i] = conditions[i].replace("%", "")
                         conditions[i] = "^" + conditions[i]
                     selections.update({keynames[i]: {"$regex": conditions[i]}})
+                elif '[' in conditions[i] and ']' in conditions[i]:
+                    selections.update({keynames[i]: {"$all": eval(conditions[i])}})
                 elif '=' in conditions[i] or '' in conditions[i]: # default is =
                     conditions[i] = conditions[i].replace("=", "").strip()
                     try: 
