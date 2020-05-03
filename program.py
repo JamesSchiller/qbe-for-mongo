@@ -5,6 +5,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from database import *
 import json
+from tkinter import messagebox
 
 global cbvar1
 global cbvar2
@@ -125,44 +126,45 @@ def query(db_name, collection_name, keynames, sorts, conditions, dmls):
         res = collection.update_many(selections, updates)
         res = res.modified_count
     elif dmls[0].lower() == "delete": 
-        for i, dml in enumerate(dmls, 0):
-            if conditions[i]:
-                if '!=' in conditions[i]:
-                    conditions[i] = conditions[i].replace("!=", "").strip()
-                    selections.update({keynames[i]: {"$ne": conditions[i]}})
-                elif '>=' in conditions[i]:
-                    conditions[i] = conditions[i].replace(">=", "").strip()
-                    selections.update({keynames[i]: {"$gte": int(conditions[i])}})
-                elif '>' in conditions[i]:
-                    conditions[i] = conditions[i].replace(">", "").strip()
-                    selections.update({keynames[i]: {"$gt": int(conditions[i])}})
-                elif '<=' in conditions[i]:
-                    conditions[i] = conditions[i].replace("<=", "").strip()
-                    selections.update({keynames[i]: {"$lte": int(conditions[i])}})
-                elif '<' in conditions[i]:
-                    conditions[i] = conditions[i].replace("<", "").strip()
-                    selections.update({keynames[i]: {"$lt": int(conditions[i])}})
-                elif 'like' in conditions[i].lower():
-                    conditions[i] = conditions[i].replace("like", "").replace("Like", "").replace("LIKE", "").strip()
-                    conditions[i] = conditions[i].replace("'", "")
-                    if conditions[i][0] == "%" and conditions[i][len(conditions[i])-1] == "%":
-                        conditions[i] = conditions[i].replace("%", "")
-                    elif conditions[i][0] == "%" and conditions[i][len(conditions[i])-1] != "%":
-                        conditions[i] = conditions[i].replace("%", "")
-                        conditions[i] += "$"
-                    elif conditions[i][0] != "%" and conditions[i][len(conditions[i])-1] == "%":
-                        conditions[i] = conditions[i].replace("%", "")
-                        conditions[i] = "^" + conditions[i]
-                    selections.update({keynames[i]: {"$regex": conditions[i]}})
-                elif '=' in conditions[i] or '' in conditions[i]: # default is =
-                    conditions[i] = conditions[i].replace("=", "").strip()
-                    try: 
-                        conditions[i] = int(conditions[i])
-                    except ValueError:
-                        print("leave string a string")
-                    selections.update({keynames[i]: {"$eq": conditions[i]}})
-        res = collection.delete_many(selections)
-        res = res.deleted_count
+        if messagebox.askyesno(message="Are you sure you want to delete?", icon="question", title="Delete"):
+            for i, dml in enumerate(dmls, 0):
+                if conditions[i]:
+                    if '!=' in conditions[i]:
+                        conditions[i] = conditions[i].replace("!=", "").strip()
+                        selections.update({keynames[i]: {"$ne": conditions[i]}})
+                    elif '>=' in conditions[i]:
+                        conditions[i] = conditions[i].replace(">=", "").strip()
+                        selections.update({keynames[i]: {"$gte": int(conditions[i])}})
+                    elif '>' in conditions[i]:
+                        conditions[i] = conditions[i].replace(">", "").strip()
+                        selections.update({keynames[i]: {"$gt": int(conditions[i])}})
+                    elif '<=' in conditions[i]:
+                        conditions[i] = conditions[i].replace("<=", "").strip()
+                        selections.update({keynames[i]: {"$lte": int(conditions[i])}})
+                    elif '<' in conditions[i]:
+                        conditions[i] = conditions[i].replace("<", "").strip()
+                        selections.update({keynames[i]: {"$lt": int(conditions[i])}})
+                    elif 'like' in conditions[i].lower():
+                        conditions[i] = conditions[i].replace("like", "").replace("Like", "").replace("LIKE", "").strip()
+                        conditions[i] = conditions[i].replace("'", "")
+                        if conditions[i][0] == "%" and conditions[i][len(conditions[i])-1] == "%":
+                            conditions[i] = conditions[i].replace("%", "")
+                        elif conditions[i][0] == "%" and conditions[i][len(conditions[i])-1] != "%":
+                            conditions[i] = conditions[i].replace("%", "")
+                            conditions[i] += "$"
+                        elif conditions[i][0] != "%" and conditions[i][len(conditions[i])-1] == "%":
+                            conditions[i] = conditions[i].replace("%", "")
+                            conditions[i] = "^" + conditions[i]
+                        selections.update({keynames[i]: {"$regex": conditions[i]}})
+                    elif '=' in conditions[i] or '' in conditions[i]: # default is =
+                        conditions[i] = conditions[i].replace("=", "").strip()
+                        try: 
+                            conditions[i] = int(conditions[i])
+                        except ValueError:
+                            print("leave string a string")
+                        selections.update({keynames[i]: {"$eq": conditions[i]}})
+            res = collection.delete_many(selections)
+            res = res.deleted_count
     else:
         for i, keyname in enumerate(keynames):
             if conditions[i]:
