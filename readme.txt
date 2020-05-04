@@ -126,3 +126,5 @@ max 9 columns in a collection
 aggregation and complex conditions not implemented
 
 refresh database and collection if you add new keys thru an insert
+
+you can only insert integers not decimals for now
