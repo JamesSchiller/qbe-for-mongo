@@ -27,7 +27,21 @@ source venv/bin/activate
 
 pip install -r requirements.txt 
 
+set environment variable at end of ~/.bashrc and source it so it sticks
+
+~/.bashrc
+--------------------------
+...
+export /Users/s13a/rsrch-25-mar-2020/tcl/qbe4
+--------------------------
+
 python program.py
+
+change first line of qbe.py to venv
+
+ln -s /Users/s13a/rsrch-25-mar-2020/tcl/qbe4/qbe.py /usr/local/bin/qbe
+
+$ qbe
 
 
 
@@ -117,6 +131,15 @@ Sort:
 Show:                      
 Conditions:          =           # Delete all profile docs where name is blank        
 DML:        delete
+
+Collection: profiles profiles
+Key:        _id      name    
+Sort:      
+Show:                      
+Conditions:          !=          # Delete all profile docs where name is NOT blank        
+DML:        delete
+
+
 
 
 DISCLAIMER:

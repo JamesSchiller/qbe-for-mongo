@@ -1,4 +1,4 @@
-#! ./venv/bin/python
+#! /Users/s13a/rsrch-25-mar-2020/tcl/qbe4/venv/bin/python
 
 from tkinter import *
 from tkinter import ttk
@@ -6,6 +6,9 @@ from PIL import Image, ImageTk
 from database import *
 import json
 from tkinter import messagebox
+import os
+
+IMAGE_PATH = os.getenv("IMAGE_PATH")
 
 global cbvar1
 global cbvar2
@@ -298,7 +301,7 @@ collectionchoosen.grid(row = 0, column=2)
 collectionchoosen.current() 
 collectionchoosen.bind("<<ComboboxSelected>>", collectionchoosen_handler)
 
-img1 = Image.open('play.png')
+img1 = Image.open(f'{IMAGE_PATH}/play.png')
 useImg1 = ImageTk.PhotoImage(img1)
 runbutton = Button(sf1, image=useImg1, command=lambda:run_query(container2))
 
@@ -335,7 +338,7 @@ for i in range(9):
 
 
 # container2 widgets
-img2 = Image.open('edit.png')
+img2 = Image.open(f'{IMAGE_PATH}/edit.png')
 useImg2 = ImageTk.PhotoImage(img2)
 editbutton = Button(container2, image=useImg2, command=lambda:raise_frame(container1))
 hozline = Frame(container2, height=2, width=10, bg="grey")
