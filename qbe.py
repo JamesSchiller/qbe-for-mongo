@@ -29,6 +29,46 @@ showcheckboxes = {}
 conditiontextboxes = {}
 dmltextboxes = {}
 
+def checkall_clicked():
+    if collectiontextboxes["0"].get():
+        cbvar1.set(True)
+    if collectiontextboxes["1"].get():
+        cbvar2.set(True)
+    if collectiontextboxes["2"].get():
+        cbvar3.set(True)
+    if collectiontextboxes["3"].get():
+        cbvar4.set(True)
+    if collectiontextboxes["4"].get():
+        cbvar5.set(True)
+    if collectiontextboxes["5"].get():
+        cbvar6.set(True)
+    if collectiontextboxes["6"].get():
+        cbvar7.set(True)
+    if collectiontextboxes["7"].get():
+        cbvar8.set(True)
+    if collectiontextboxes["8"].get():
+        cbvar9.set(True)
+
+def uncheckall_clicked():
+    if collectiontextboxes["0"].get():
+        cbvar1.set(False)
+    if collectiontextboxes["1"].get():
+        cbvar2.set(False)
+    if collectiontextboxes["2"].get():
+        cbvar3.set(False)
+    if collectiontextboxes["3"].get():
+        cbvar4.set(False)
+    if collectiontextboxes["4"].get():
+        cbvar5.set(False)
+    if collectiontextboxes["5"].get():
+        cbvar6.set(False)
+    if collectiontextboxes["6"].get():
+        cbvar7.set(False)
+    if collectiontextboxes["7"].get():
+        cbvar8.set(False)
+    if collectiontextboxes["8"].get():
+        cbvar9.set(False)
+
 def clear_textboxes():
     for i in range(9):
         collectiontextboxes[str(i)].delete(0, END)
@@ -37,6 +77,12 @@ def clear_textboxes():
         conditiontextboxes[str(i)].delete(0, END)
         dmltextboxes[str(i)].delete(0, END)
         cbvars[i].set(0)
+
+def clear_textboxes_2():
+    for i in range(9):
+        sorttextboxes[str(i)].delete(0, END)
+        conditiontextboxes[str(i)].delete(0, END)
+        dmltextboxes[str(i)].delete(0, END)
 
 def collectionchoosen_handler(event):
     textarea.delete('1.0', END)
@@ -249,9 +295,12 @@ def run_query(frame):
 
     raise_frame(frame)
 
+def configure(event):
+    canvas.after(50, canvas.xview_moveto, 0)
+
 root = Tk()
 
-root.geometry("900x450")
+root.geometry("1100x500")
 
 root.rowconfigure(0, weight=1) 
 root.columnconfigure(0, weight=1)
@@ -270,6 +319,7 @@ hoz2 = Frame(container1, height=2, width=10, bg="grey")
 canvas = Canvas(container1)
 scrollbar = Scrollbar(container1, orient="horizontal", command=canvas.xview)
 scrollableframe = Frame(canvas)
+buttonframe = Frame(container1)
 
 scrollableframe.bind(
     "<Configure>",
@@ -277,9 +327,6 @@ scrollableframe.bind(
         scrollregion=canvas.bbox("all")
     )
 )
-
-def configure(event):
-    canvas.after(50, canvas.xview_moveto, 0)
 
 canvas.after(50, canvas.xview_moveto, 0) # hack to start scollbar at leftmost position
 canvas.bind("<Configure>", configure) # and to keep it that way
@@ -336,6 +383,9 @@ for i in range(9):
     showcheckboxes[str(i)] = Checkbutton(scrollableframe, variable=cbvars[i])
     conditiontextboxes[str(i)] = Entry(scrollableframe)
 
+checkallbutton = Button(scrollableframe, text="Check All", command=checkall_clicked)
+uncheckallbutton = Button(scrollableframe, text="Uncheck All", command=uncheckall_clicked)
+clearallbutton = Button(scrollableframe, text="Clear All", command=clear_textboxes_2)
 
 # container2 widgets
 img2 = Image.open(f'{IMAGE_PATH}/edit.png')
@@ -356,6 +406,7 @@ sf2.grid(row=2, column=0, sticky='news')
 hoz2.grid(row=3, column=0, sticky='news')
 canvas.grid(row=4, column=0, sticky='ew')
 scrollbar.grid(row=5, column=0, stick='ew')
+buttonframe.grid(row=6, column=0, sticky='w')
 
 # sf1 grid
 runbutton.grid(row=0, column=4)
@@ -425,6 +476,9 @@ dmltextboxes["5"].grid(row=5, column=6)
 dmltextboxes["6"].grid(row=5, column=7)
 dmltextboxes["7"].grid(row=5, column=8)
 dmltextboxes["8"].grid(row=5, column=9)
+checkallbutton.grid(row=6, column=1)
+uncheckallbutton.grid(row=6, column=2)
+clearallbutton.grid(row=6, column=3)
 
 # container2 grid
 editbutton.grid(row=0, column=0, sticky="w")
