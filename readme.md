@@ -12,42 +12,42 @@
 Collection: profiles
 Key:        name
 Sort:
-Show:  
+Show:       x
 Conditions: john
 DML: 
 
 Collection: profiles
 Key:        name
 Sort: 
-Show: 
+Show:       x
 Conditions: like '%oh%'
 DML:
 
 Collection: profiles
 Key:        age
 Sort: 
-Show:
+Show:       x
 Conditions: < 45
 DML:
 
 Collection: profiles
 Key:        name
 Sort: 
-Show:
+Show:       x
 Conditions: != john
 DML: 
 
 Collection: profiles profiles
 Key:        name     age
 Sort:       asc      desc
-Show:
+Show:       x        x
 Conditions:
 DML:
 
 Collection: profiles
 Key:        name
 Sort:       desc
-Show: 
+Show:       x
 Conditions:
 DML:
 
